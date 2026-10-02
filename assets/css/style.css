@@ -191,7 +191,8 @@ p{ margin:0 0 1.4em; }
 }
 @media (min-width:640px){ .cards{ grid-template-columns:repeat(2,1fr); } }
 @media (min-width:960px){ .cards.c3{ grid-template-columns:repeat(3,1fr); } }
-.cards li .ph{ margin-bottom:14px; }
+.cards li .ph,
+.cards li .photo{ margin-bottom:14px; }
 .cards h3{ margin-bottom:6px; }
 .cards p{ margin:0; font-size:15px; color:var(--washi-dim); }
 
