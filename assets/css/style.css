@@ -1,0 +1,258 @@
+@charset "utf-8";
+
+/* =========================================================
+   BESSO忍町 HP  style_v1.css
+   方針：夜の町が主役。墨色の地に提灯の灯りの差し色。
+   写真はすべて仮置き（.ph のブロック）。差し替え時は
+   <div class="ph"> を <img> に置き換える。
+   ========================================================= */
+
+:root{
+  --sumi:      #12100E;   /* 地（夜） */
+  --sumi-2:    #1B1815;   /* 一段明るい地 */
+  --washi:     #F3EEE4;   /* 和紙（文字） */
+  --washi-dim: #BFB5A6;   /* 補助文字 */
+  --chochin:   #D9873B;   /* 提灯（差し色） */
+  --bengara:   #B0472B;   /* 弁柄（強調） */
+  --line:      rgba(243,238,228,.18);
+  --maxw:      1080px;
+  --gut:       24px;
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--sumi);
+  color:var(--washi);
+  font-family:"Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
+  font-size:16px;
+  line-height:1.9;
+  letter-spacing:.02em;
+  -webkit-font-smoothing:antialiased;
+}
+img{ max-width:100%; height:auto; display:block; }
+a{ color:var(--chochin); }
+
+/* ---- 言語切替（.ja / .en） ---- */
+body[data-lang="ja"] .en{ display:none; }
+body[data-lang="en"] .ja{ display:none; }
+
+/* ---- 共通レイアウト ---- */
+.wrap{ width:100%; max-width:var(--maxw); margin-inline:auto; padding-inline:var(--gut); }
+section{ padding-block:clamp(64px,10vw,120px); }
+.sec-num{
+  font-family:"Oswald","Arial Narrow",sans-serif;
+  font-size:13px; letter-spacing:.3em; color:var(--chochin);
+  margin:0 0 12px;
+}
+h2{
+  font-family:"Noto Serif JP","Yu Mincho",serif;
+  font-weight:600;
+  font-size:clamp(24px,4.4vw,38px);
+  line-height:1.5;
+  margin:0 0 28px;
+}
+h3{
+  font-family:"Noto Serif JP","Yu Mincho",serif;
+  font-weight:600; font-size:clamp(18px,2.6vw,22px);
+  margin:0 0 10px;
+}
+p{ margin:0 0 1.4em; }
+.lead{ font-size:clamp(17px,2.2vw,19px); }
+.dim{ color:var(--washi-dim); }
+.small{ font-size:14px; line-height:1.8; }
+
+/* ---- 写真の仮置きブロック ---- */
+.ph{
+  position:relative;
+  background:repeating-linear-gradient(45deg,var(--sumi-2) 0 12px,#211D19 12px 24px);
+  border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  text-align:center;
+  color:var(--washi-dim);
+  font-size:13px; line-height:1.7; letter-spacing:.06em;
+  padding:16px;
+}
+.ph::after{
+  content:"仮";
+  position:absolute; top:8px; left:8px;
+  font-size:11px; letter-spacing:.1em;
+  color:var(--sumi); background:var(--chochin);
+  padding:1px 7px;
+}
+.ph.r-16x9{ aspect-ratio:16/9; }
+.ph.r-4x3 { aspect-ratio:4/3; }
+.ph.r-1x1 { aspect-ratio:1/1; }
+.ph.r-3x4 { aspect-ratio:3/4; }
+
+/* ---- ヘッダー ---- */
+.l-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(18,16,14,.86);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid var(--line);
+}
+.l-header .wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:16px; min-height:60px;
+}
+.logo{
+  font-family:"Oswald","Arial Narrow",sans-serif;
+  font-size:17px; letter-spacing:.22em; text-decoration:none; color:var(--washi);
+  white-space:nowrap;
+}
+.logo small{ display:block; font-size:10px; letter-spacing:.3em; color:var(--washi-dim); }
+.head-right{ display:flex; align-items:center; gap:12px; }
+.lang{ display:flex; border:1px solid var(--line); }
+.lang button{
+  background:none; border:0; color:var(--washi-dim);
+  font:inherit; font-size:12px; letter-spacing:.12em;
+  padding:6px 10px; cursor:pointer;
+}
+.lang button[aria-pressed="true"]{ background:var(--washi); color:var(--sumi); }
+.btn{
+  display:inline-block; text-decoration:none; text-align:center;
+  background:var(--bengara); color:var(--washi);
+  padding:10px 20px; font-size:14px; letter-spacing:.08em;
+  border:1px solid var(--bengara);
+}
+.btn:hover{ background:transparent; color:var(--washi); }
+.btn-ghost{ background:transparent; border-color:var(--line); color:var(--washi); }
+.btn-lg{ padding:16px 40px; font-size:16px; }
+.head-right .btn{ padding:8px 16px; font-size:13px; }
+
+/* ---- ヒーロー ---- */
+.hero{ position:relative; padding:0; }
+.hero .ph{ min-height:min(84vh,720px); }
+.hero-img{
+  width:100%; height:min(88vh,760px); object-fit:cover; object-position:center 42%;
+}
+.hero-shade{
+  position:absolute; inset:0;
+  background:linear-gradient(to top,rgba(18,16,14,.88) 0%,rgba(18,16,14,.35) 45%,rgba(18,16,14,.15) 100%);
+  pointer-events:none;
+}
+@media (max-width:640px){
+  .hero-img{ height:min(78vh,620px); object-position:center 38%; }
+}
+.hero-copy{
+  position:absolute; inset:auto 0 0 0;
+  padding-block:clamp(32px,7vw,72px);
+  background:linear-gradient(to top,rgba(18,16,14,.92),rgba(18,16,14,0));
+}
+.hero-copy h1{
+  font-family:"Noto Serif JP","Yu Mincho",serif;
+  font-weight:600; font-size:clamp(26px,6vw,52px);
+  line-height:1.45; margin:0 0 14px;
+  text-shadow:0 2px 24px rgba(0,0,0,.6);
+}
+.hero-copy .sub{ margin:0; color:var(--washi-dim); font-size:clamp(14px,2.2vw,17px); }
+.hero-meta{
+  margin-top:20px; display:flex; flex-wrap:wrap; gap:8px 20px;
+  font-size:13px; letter-spacing:.06em; color:var(--washi-dim);
+}
+
+/* ---- 道のり（駅から10分） ---- */
+.route{ background:var(--sumi-2); }
+.route-map{ margin-bottom:32px; }
+.route-svg{ width:100%; height:auto; display:block; overflow:visible; }
+.route-svg .rs-t{
+  font-family:"Noto Serif JP","Yu Mincho",serif;
+  font-size:19px; fill:var(--washi);
+}
+.route-svg .rs-s{
+  font-family:"Oswald","Arial Narrow",sans-serif;
+  font-size:14px; letter-spacing:.16em; fill:var(--washi-dim);
+}
+@media (max-width:640px){
+  .route-svg .rs-t{ font-size:26px; }
+  .route-svg .rs-s{ font-size:19px; }
+}
+.route-steps{
+  list-style:none; margin:0; padding:0;
+  display:grid; gap:1px; background:var(--line);
+  border:1px solid var(--line);
+}
+.route-steps li{ background:var(--sumi-2); padding:20px 22px; }
+.route-steps .t{
+  font-family:"Oswald","Arial Narrow",sans-serif;
+  color:var(--chochin); font-size:13px; letter-spacing:.2em; display:block; margin-bottom:6px;
+}
+.route-steps strong{ display:block; font-weight:600; margin-bottom:4px; }
+@media (min-width:768px){ .route-steps{ grid-template-columns:repeat(4,1fr); } }
+
+/* ---- 夜の町（カード） ---- */
+.cards{
+  list-style:none; margin:0; padding:0;
+  display:grid; gap:20px;
+}
+@media (min-width:640px){ .cards{ grid-template-columns:repeat(2,1fr); } }
+@media (min-width:960px){ .cards.c3{ grid-template-columns:repeat(3,1fr); } }
+.cards li .ph{ margin-bottom:14px; }
+.cards h3{ margin-bottom:6px; }
+.cards p{ margin:0; font-size:15px; color:var(--washi-dim); }
+
+/* ---- 2カラム（文章＋写真） ---- */
+.split{ display:grid; gap:28px; align-items:center; }
+@media (min-width:880px){
+  .split{ grid-template-columns:1fr 1fr; gap:48px; }
+  .split.rev .split-txt{ order:2; }
+}
+
+/* ---- 設備・仕様の表 ---- */
+.spec{ width:100%; border-collapse:collapse; font-size:15px; }
+.spec th,.spec td{
+  text-align:left; vertical-align:top;
+  padding:14px 12px; border-bottom:1px solid var(--line);
+}
+.spec th{ width:34%; font-weight:600; color:var(--washi-dim); }
+
+/* ---- 泊まり方（手順） ---- */
+.steps{ list-style:none; margin:0; padding:0; counter-reset:s; display:grid; gap:20px; }
+@media (min-width:880px){ .steps{ grid-template-columns:repeat(4,1fr); } }
+.steps li{ counter-increment:s; border-top:2px solid var(--chochin); padding-top:16px; }
+.steps li::before{
+  content:counter(s,decimal-leading-zero);
+  font-family:"Oswald","Arial Narrow",sans-serif;
+  color:var(--chochin); font-size:13px; letter-spacing:.2em; display:block; margin-bottom:8px;
+}
+.steps p{ margin:0; font-size:15px; color:var(--washi-dim); }
+
+/* ---- 料金・予約 ---- */
+.book{ background:var(--sumi-2); text-align:center; }
+.book h2{ margin-bottom:16px; }
+.price-label{
+  display:inline-block;
+  border:1px solid var(--chochin); color:var(--chochin);
+  font-size:13px; letter-spacing:.16em;
+  padding:4px 14px; margin:0 0 16px;
+}
+.price{
+  font-family:"Oswald","Arial Narrow",sans-serif;
+  font-size:clamp(30px,6vw,46px); letter-spacing:.04em; margin:0 0 6px; color:var(--chochin);
+}
+.book .btn{ margin-top:24px; }
+
+/* ---- FAQ ---- */
+.faq details{ border-bottom:1px solid var(--line); padding:18px 0; }
+.faq details:first-of-type{ border-top:1px solid var(--line); }
+.faq summary{ cursor:pointer; font-weight:600; list-style:none; }
+.faq summary::-webkit-details-marker{ display:none; }
+.faq summary::before{ content:"＋"; color:var(--chochin); margin-right:10px; }
+.faq details[open] summary::before{ content:"−"; }
+.faq p{ margin:12px 0 0; color:var(--washi-dim); font-size:15px; }
+
+/* ---- アクセス ---- */
+.map-embed{ margin-bottom:24px; }
+
+/* ---- フッター ---- */
+.l-footer{
+  border-top:1px solid var(--line);
+  padding-block:40px;
+  font-size:13px; color:var(--washi-dim);
+}
+.l-footer .logo{ margin-bottom:16px; display:inline-block; }
+.l-footer nav{ display:flex; flex-wrap:wrap; gap:8px 20px; margin-bottom:16px; }
+.l-footer nav a{ color:var(--washi-dim); text-decoration:none; }
+.l-footer nav a:hover{ color:var(--chochin); }
