@@ -1,0 +1,5 @@
+# 改行コードを統一する（GitHubの画面編集と手元の編集が衝突しないようにするため）
+* text=auto eol=lf
+*.jpg binary
+*.png binary
+*.webp binary

@@ -158,18 +158,16 @@ p{ margin:0 0 1.4em; }
 /* ---- 道のり（駅から10分） ---- */
 .route{ background:var(--sumi-2); }
 .route-map{ margin-bottom:32px; }
-.route-svg{ width:100%; height:auto; display:block; overflow:visible; }
-.route-svg .rs-t{
-  font-family:"Noto Serif JP","Yu Mincho",serif;
-  font-size:19px; fill:var(--washi);
+/* 地図の埋め込み（マイマップ）。高さは幅に対して自動で変わる */
+.map-frame{
+  position:relative; width:100%; aspect-ratio:16/10;
+  border:1px solid var(--line); background:var(--sumi);
 }
-.route-svg .rs-s{
-  font-family:"Oswald","Arial Narrow",sans-serif;
-  font-size:14px; letter-spacing:.16em; fill:var(--washi-dim);
+.map-frame iframe{
+  position:absolute; inset:0; width:100%; height:100%; border:0; display:block;
 }
 @media (max-width:640px){
-  .route-svg .rs-t{ font-size:26px; }
-  .route-svg .rs-s{ font-size:19px; }
+  .map-frame{ aspect-ratio:3/4; }
 }
 .route-steps{
   list-style:none; margin:0; padding:0;
